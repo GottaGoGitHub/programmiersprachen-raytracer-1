@@ -1,8 +1,9 @@
-#pragma once
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 class Shape {
-	virtual float area() const = 0;
-	virtual float volume() const = 0;
+	public:
+		virtual float area(void) const = 0 ;
+		virtual float volume(void) const  = 0 ;
+	private:
 };
 #endif
