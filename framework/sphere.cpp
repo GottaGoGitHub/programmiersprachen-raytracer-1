@@ -1,13 +1,16 @@
 #include "sphere.hpp"
 #include <iostream>
 
-Sphere::Sphere():
+Sphere::Sphere() :
 	center_{0, 0, 0},
-	radius_{0}{}
+	radius_{0},
+	Shape{}{}
 
-Sphere::Sphere(glm::vec3 center, float radius) :
+Sphere::Sphere(glm::vec3 const& center, float radius, std::string const& name, Color const& color) :
 	center_{ center },
-	radius_{radius}{}
+	radius_{radius},
+	name_{ name },
+	color_{ color }{}
 
 Sphere::~Sphere() {
 	std::cout << "Sphere destructor" << std::endl;
