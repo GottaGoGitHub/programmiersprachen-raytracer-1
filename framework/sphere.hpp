@@ -5,6 +5,7 @@
 #include "shape.hpp"
 #include <glm/vec3.hpp>
 #include <math.h>
+#include <glm/gtx/intersect.hpp>
 
 class Sphere : public Shape {
 	public:
@@ -14,6 +15,7 @@ class Sphere : public Shape {
 		virtual float area() const override;
 		virtual float volume() const override;
 		virtual std::ostream& print(std::ostream& os)const override;
+		virtual HitPoint intersect(Ray ray) override;
 	private:
 		std::string name_;
 		Color color_;

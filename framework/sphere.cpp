@@ -35,3 +35,18 @@ std::ostream& Sphere::print(std::ostream& os) const
 std::ostream& operator<<(std::ostream& os, Sphere const& s) {
 	return s.print(os);
 }
+
+HitPoint Sphere::intersect(Ray ray) {
+
+	HitPoint hitpoint;
+	Ray norm;
+	norm.direction = glm::normalize(ray.direction);
+	float distance = 0.0f;
+
+	hitpoint.gotHit = glm::intersectRaySphere(ray.origin, norm.direction, center_, radius_ * radius_, distance);
+	hitpoint.name = name_;
+	hitpoint.color = color_;
+	hitpoint.distance = distance;
+
+	return hitpoint;
+}
