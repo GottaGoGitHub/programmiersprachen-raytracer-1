@@ -1,16 +1,15 @@
 #include "box.hpp"
 
 Box::Box():
+    Shape{},
 	min_{0, 0, 0},
-	max_{0, 0, 0},
-    Shape{}{}
+	max_{0, 0, 0}{}
 
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color) :
+Box::Box(std::string const& name, Color const& color, glm::vec3 const& min, glm::vec3 const& max) :
+    Shape{name, color},
 	min_{min},
-	max_{max},
-    name_{ name },
-    color_{ color }{}
+	max_{max}{}
 
 
 Box::~Box() {
@@ -33,4 +32,16 @@ float Box::area() const {
 
     float area = 2 * (a * b) + 2 * (a * c) + 2 * (b * c);
     return area;
+}
+
+std::ostream& Box::print(std::ostream& os) const
+{
+    Shape::print(os);
+    return std::cout
+        << " Min: " << min_.x << " " << min_.y << " " << min_.z
+        << " Max: " << max_.x << " " << max_.y << " " << max_.z << std::endl;
+}
+
+std::ostream& operator<<(std::ostream& os, Box const& b) {
+    return b.print(os);
 }

@@ -10,10 +10,12 @@ TEST_CASE("sphere") {
     std::string name{ "Eric" };
     Color color{ 1.5, 0.75, 1.2 };
 
-    Sphere sphere{ center, radius, name, color};
+    Sphere sphere{ name, color, center, radius };
 
     REQUIRE(sphere.area() == Approx(113.09734f));
     REQUIRE(sphere.volume() == Approx(113.09451f));
+
+    std::cout << sphere << std::endl;
 }
 
 TEST_CASE("box") {
@@ -22,10 +24,12 @@ TEST_CASE("box") {
     std::string name{ "Kai Uwe" };
     Color color{ 1.5, 0.75, 1.2 };
 
-    Box box{ min, max, name, color};
+    Box box{ name, color, min, max };
 
     REQUIRE(box.area() == 150);
     REQUIRE(box.volume() == 125);
+
+    std::cout << box << std::endl;
 }
 
 int main(int argc, char *argv[])

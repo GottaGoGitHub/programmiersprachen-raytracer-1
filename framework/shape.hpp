@@ -9,9 +9,11 @@ class Shape {
 		virtual ~Shape();
 		virtual float area(void) const = 0 ;
 		virtual float volume(void) const  = 0 ;
-	private:
+		virtual std::ostream& print(std::ostream& os) const;
+	protected:
 		std::string name_;
 		Color color_;
 
 };
+std::ostream& operator<<(std::ostream& os, Shape const& s);
 #endif
