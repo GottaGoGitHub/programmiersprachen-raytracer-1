@@ -3,8 +3,11 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 #include "box.hpp"
-# include <glm/glm.hpp>
-# include <glm/gtx/intersect.hpp>
+#include "material.hpp"
+#include "scene.hpp"
+#include "sdfloader.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 TEST_CASE("sphere") {
     glm::vec3 center{ 20, 20, 20 };
@@ -68,6 +71,17 @@ TEST_CASE("task 5.8", "[virtual]"){
 /*
 entfernt virtual von der Basisklasse, wird beim zweiten aufruf nur der Shape Destruktor und nicht der Sphere Destruktor verwendet
 */
+
+TEST_CASE("testing mat", "[material]"){
+    Material m;
+    REQUIRE(m.name_ == "default material");
+    //std::cout << *def << std::endl;
+}
+
+// TEST_CASE("sdfloader", "[sdf]"){
+//     std::string filepath = "../files/scene.txt";
+//     Scene scene = load(filepath);
+// }
 
 int main(int argc, char *argv[])
 {
