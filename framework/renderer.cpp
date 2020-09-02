@@ -36,6 +36,10 @@ void Renderer::render()
   ppm_.save(filename_);
 }
 
+// void Renderer::render(Scene &scene) {
+
+// }
+
 void Renderer::write(Pixel const& p)
 {
   // flip pixels, because of opengl glDrawPixels

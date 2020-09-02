@@ -15,4 +15,4 @@ struct HitPoint {
     glm::vec3 direction;
 
 };
-#endif#pragma once
+#endif
