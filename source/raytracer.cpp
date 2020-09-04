@@ -3,6 +3,8 @@
 #include "sdfloader.hpp"
 #include "scene.hpp"
 #include "shape.hpp"
+#include "sphere.hpp"
+#include "camera.hpp"
 #include "ppmwriter.hpp"
 #include "light.hpp"
 
@@ -19,42 +21,40 @@
 int main(int argc, char* argv[])
 {
 
-  if(argc < 2) {
-    std::cout << "Usage: " << argv[0] << " No File Path given" << std::endl;
+  // if(argc < 2) {
+  //   std::cout << "Usage: " << argv[0] << " No File Path given" << std::endl;
     
-    return -1; 
-  }
+  //   return -1; 
+  // }
 
-  SdfLoader sdf{};
   Scene scene{};
 
-  sdf.load(argv, scene);
+  Color red{255, 0, 0};
 
+  Light light{};
+  auto l1 = std::make_shared<Light>(light);
+  scene.lights.push_back(l1);
 
-  std::cout << scene.file_name << std::endl;
-  std::cout << "yewew" << std::endl;
-
-  for(auto elem : scene.material_map) {
-    std::cout << elem.first << ", " << elem.second->name_ << ", " << elem.second->ka_ << ", " << elem.second->kd_ << ", " << elem.second->ks_ << ", " << elem.second->m_ << std::endl;
-  }
-
+  Sphere kreis_eins{"kreis_eins", red, {0.0f, 0.0f, -10.0f}, 4.0f};
+  auto s1 = std::make_shared<Sphere>(kreis_eins);
+  scene.objects.push_back(s1);
 
   unsigned const image_width = 800;
   unsigned const image_height = 600;
   //std::string const filename = "./checkerboard.ppm";
 
-  // Renderer renderer{scene.xres, scene.yres, scene.file_name};
+  Renderer renderer{scene.xres, scene.yres, scene.file_name};
 
-  // renderer.render();
+  renderer.render(scene);
 
-  // Window window{{image_width, image_height}};
+  Window window{{image_width, image_height}};
 
-  // while (!window.should_close()) {
-  //   if (window.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-  //     window.close();
-  //   }
-  //   window.show(renderer.color_buffer());
-  // }
+  while (!window.should_close()) {
+    if (window.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+      window.close();
+    }
+    window.show(renderer.color_buffer());
+  }
 
-  // return 0;
+  return 0;
 }

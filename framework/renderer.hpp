@@ -23,8 +23,10 @@ public:
   Renderer(unsigned w, unsigned h, std::string const& file);
 
   void render();
-  // void render(Scene &scene);
+  void render(Scene &scene);
   void write(Pixel const& p);
+  Color trace(Scene &scene, Ray &ray);
+  Color shade(Scene &scene, HitPoint &hit);
 
   inline std::vector<Color> const& color_buffer() const
   {

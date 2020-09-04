@@ -51,6 +51,24 @@ struct Color
     return tmp;
   }
 
+  friend Color operator*(Color const& a, Color const&b)
+  {
+    Color tmp{0,0,0};
+    tmp.r = a.r * b.r;
+    tmp.g = a.g * b.g;
+    tmp.b = a.b * b.b;
+    return tmp;
+  }
+
+   friend Color operator*(float a, Color const&b)
+  {
+    Color tmp{0,0,0};
+    tmp.r = a * b.r;
+    tmp.g = a * b.g;
+    tmp.b = a * b.b;
+    return tmp;
+  }
+
   float r;
   float g;
   float b;
