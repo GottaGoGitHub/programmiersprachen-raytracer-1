@@ -4,10 +4,11 @@
 #include <iostream>
 #include "hitpoint.hpp"
 #include "ray.hpp"
+#include "material.hpp"
 class Shape {
 	public:
 		Shape();
-		Shape(std::string const& name, Color const& color);
+		Shape(std::string const& name, Material const& mat);
 		virtual ~Shape();
 		virtual float area(void) const = 0 ;
 		virtual float volume(void) const  = 0 ;
@@ -15,8 +16,8 @@ class Shape {
 		virtual HitPoint intersect(Ray ray) = 0;
 	protected:
 		std::string name_;
-		Color color_;
-
+		//Color color_;
+		Material material_;
 };
 std::ostream& operator<<(std::ostream& os, Shape const& s);
 #endif

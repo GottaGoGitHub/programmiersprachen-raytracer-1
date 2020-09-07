@@ -10,7 +10,7 @@
 class Sphere : public Shape {
 	public:
 		Sphere();
-		Sphere(std::string const& name, Color const& color, glm::vec3 const& center, float radius);
+		Sphere(std::string const& name, glm::vec3 const& center, float radius, Material const& mat);
 		~Sphere();
 		virtual float area() const override;
 		virtual float volume() const override;
@@ -18,7 +18,7 @@ class Sphere : public Shape {
 		virtual HitPoint intersect(Ray ray) override;
 	private:
 		std::string name_;
-		Color color_;
+		//Color color_;
 		glm::vec3 center_;
 		float radius_;
 };

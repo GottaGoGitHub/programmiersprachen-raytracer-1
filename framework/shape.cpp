@@ -2,18 +2,18 @@
 
 Shape::Shape():
 	name_{"NULL"},
-	color_{}{}
+	material_{}{}
 
-Shape::Shape(std::string const& name, Color const& color):
+Shape::Shape(std::string const& name, Material const& mat):
 	name_{name},
-	color_{color}{}
+	material_{mat}{}
 
 Shape::~Shape(){
 	std::cout << "Shape destructor" << std::endl;
 }
 
 std::ostream& Shape::print(std::ostream& os) const {
-	return os << "Name: " << name_ << " Farbe: " << color_ << std::endl;
+	return os << "Name: " << name_ << " Farbe: " << "ne" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, Shape const& s) {

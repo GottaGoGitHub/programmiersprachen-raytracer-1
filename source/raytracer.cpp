@@ -31,11 +31,13 @@ int main(int argc, char* argv[])
 
   Color red{255, 0, 0};
 
+  Material blue{ 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
+
   Light light{};
   auto l1 = std::make_shared<Light>(light);
   scene.lights.push_back(l1);
 
-  Sphere kreis_eins{"kreis_eins", red, {0.0f, 0.0f, -20.0f}, 2.0f};
+  Sphere kreis_eins{"kreis_eins", {0.0f, 0.0f, -20.0f}, 2.0f, blue};
   auto s1 = std::make_shared<Sphere>(kreis_eins);
   scene.objects.push_back(s1);
 
