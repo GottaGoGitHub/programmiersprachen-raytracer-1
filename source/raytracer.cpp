@@ -56,5 +56,7 @@ int main(int argc, char* argv[])
     window.show(renderer.color_buffer());
   }
 
+  std::cout << scene.lights[0]->name << std::endl;
+
   return 0;
 }
