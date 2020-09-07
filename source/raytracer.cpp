@@ -35,15 +35,15 @@ int main(int argc, char* argv[])
   auto l1 = std::make_shared<Light>(light);
   scene.lights.push_back(l1);
 
-  Sphere kreis_eins{"kreis_eins", red, {0.0f, 0.0f, -10.0f}, 4.0f};
+  Sphere kreis_eins{"kreis_eins", red, {0.0f, 0.0f, -20.0f}, 2.0f};
   auto s1 = std::make_shared<Sphere>(kreis_eins);
   scene.objects.push_back(s1);
 
-  unsigned const image_width = 800;
-  unsigned const image_height = 600;
+  unsigned const image_width = 600;
+  unsigned const image_height = 800;
   //std::string const filename = "./checkerboard.ppm";
 
-  Renderer renderer{scene.xres, scene.yres, scene.file_name};
+  Renderer renderer{scene.yres, scene.xres, scene.file_name};
 
   renderer.render(scene);
 
