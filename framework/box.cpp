@@ -6,8 +6,8 @@ Box::Box():
 	max_{0, 0, 0}{}
 
 
-Box::Box(std::string const& name, Color const& color, glm::vec3 const& min, glm::vec3 const& max) :
-    Shape{name, color},
+Box::Box(std::string const& name, glm::vec3 const& min, glm::vec3 const& max, Material const& mat) :
+    Shape{name, mat},
 	min_{min},
 	max_{max}{}
 
