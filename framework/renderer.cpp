@@ -113,11 +113,9 @@ Color Renderer::shade(Scene &scene, HitPoint &hit) {
 
   //glm::vec3 norm = glm::normalize(hit.normale);
 
-  glm::vec3 n = hit.normale * direction_to_light;
+  auto n = glm::dot(glm::normalize(hit.normale), direction_to_light);
 
-  Color n_transformed{n.x, n.y, n.z};
-
-  Color res = n_transformed * ambient_color * tmp;
+  Color res = n * ambient_color * tmp;
 
   // for(auto lightsource : scene.lights) {
 
