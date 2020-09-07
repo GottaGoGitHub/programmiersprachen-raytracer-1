@@ -13,11 +13,11 @@ TEST_CASE("sphere") {
     glm::vec3 center{ 20, 20, 20 };
     float radius = 3;
     std::string name{ "Eric" };
-    Color color{ 1.5, 0.75, 1.2 };
+    //Color color{ 1.5, 0.75, 1.2 };
 
-    Material blue{ 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
+    Material blue{"blue", 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
 
-    Sphere sphere{name, center, radius, blue};
+    Sphere sphere{name, blue, center, radius};
 
     REQUIRE(sphere.area() == Approx(113.09734f));
     REQUIRE(sphere.volume() == Approx(113.09451f));
