@@ -6,7 +6,7 @@ Sphere::Sphere() :
 	radius_{0},
 	Shape{}{}
 
-Sphere::Sphere(std::string const& name, glm::vec3 const& center, float radius, Material const& mat) :
+Sphere::Sphere(std::string const& name, Material const& mat, glm::vec3 const& center, float radius ) :
 	Shape{name, mat},
 	center_{ center },
 	radius_{radius}{}
