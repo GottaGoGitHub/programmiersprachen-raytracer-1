@@ -11,7 +11,7 @@ struct HitPoint {
     bool gotHit;
     float distance;
     std::string name;
-    Color color;
+    //Color color;
     glm::vec3 hitpoint;
     glm::vec3 direction;
     glm::vec3 normale;
