@@ -27,6 +27,7 @@ public:
   void write(Pixel const& p);
   Color trace(Scene &scene, Ray &ray);
   Color shade(Scene &scene, HitPoint &hit);
+  Color reflection(Scene& scene, HitPoint const& hit);
 
   inline std::vector<Color> const& color_buffer() const
   {

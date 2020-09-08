@@ -5,10 +5,11 @@
 
 struct Camera {
 
-    glm::vec3 position{0.0f, 0.0f, 0.0f};
-    float phi = 45.0f;
-    glm::vec3 direction{0.0f, 0.0f, -1.0f};
 
+    float phi = 120.0f;
+    glm::vec3 position{-200.0f, 0.0f, 0.0f};
+    glm::vec3 direction{0.0f, 0.0f, -1.0f};
+    glm::vec3 up{ 0.0f, 1.0f, 0.0f };
 };
 
 #endif //CAMERA_HPP

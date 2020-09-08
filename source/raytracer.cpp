@@ -27,29 +27,30 @@ int main(int argc, char* argv[])
   //   return -1; 
   // }
 
-  Scene scene{};
+        Scene scene{};
 
-  Color red{255, 0, 0};
+        Color red{ 255, 0, 0 };
 
-  Material blue{"blue", 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
+        Material blue{ "blue", {0.0f, 0.0f, 0.7f}, {0.0f, 0.0f, 0.1f}, {0.0f, 0.0f, 0.1f}, 10.0f };
 
-  Light light{};
-  auto l1 = std::make_shared<Light>(light);
-  scene.lights.push_back(l1);
+        Light light{};
+        auto l1 = std::make_shared<Light>(light);
+        scene.lights.push_back(l1);
 
-  Sphere kreis_eins{"kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 2.0f};
-  auto s1 = std::make_shared<Sphere>(kreis_eins);
-  scene.objects.push_back(s1);
+        Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 2.0f };
+        auto s1 = std::make_shared<Sphere>(kreis_eins);
+        scene.objects.push_back(s1);
 
-  unsigned const image_width = 600;
-  unsigned const image_height = 800;
-  //std::string const filename = "./checkerboard.ppm";
+        unsigned const image_width = 800;
+        unsigned const image_height = 600;
+        //std::string const filename = "./checkerboard.ppm";
 
-  Renderer renderer{scene.yres, scene.xres, scene.file_name};
+        Renderer renderer{ scene.yres, scene.xres, scene.file_name };
 
-  renderer.render(scene);
+        renderer.render(scene);
+    //}
 
-  Window window{{image_width, image_height}};
+ /* Window window{{image_width, image_height}};
 
   while (!window.should_close()) {
     if (window.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -58,7 +59,7 @@ int main(int argc, char* argv[])
     window.show(renderer.color_buffer());
   }
 
-  std::cout << scene.lights[0]->name << std::endl;
+  std::cout << scene.lights[0]->name << std::endl;*/
 
   return 0;
 }

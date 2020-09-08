@@ -17,7 +17,7 @@ class Sphere : public Shape {
 		virtual std::ostream& print(std::ostream& os)const override;
 		virtual HitPoint intersect(Ray ray) override;
 	private:
-		std::string name_;
+		//std::string name_;
 		//Color color_;
 		glm::vec3 center_;
 		float radius_;

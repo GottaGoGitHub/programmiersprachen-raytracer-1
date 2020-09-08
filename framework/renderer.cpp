@@ -13,6 +13,7 @@
 #include "renderer.hpp"
 #include <algorithm>
 #include <cmath>
+#include <glm/glm.hpp>
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
@@ -64,7 +65,7 @@ void Renderer::render(Scene &scene) {
     }
   }
 
-  ppm_.save("test" + filename_);
+  ppm_.save("raytracer_" + filename_);
 }
 
 void Renderer::write(Pixel const& p)
@@ -105,36 +106,25 @@ Color Renderer::trace(Scene &scene, Ray &ray) {
 
 Color Renderer::shade(Scene &scene, HitPoint &hit) {
 
-  Color ambient_color = scene.ambient * hit.material.ka_;
+    Color res{ 0.0f, 0.0f, 0.0f };
 
-  //Color tmp = scene.lights[0]->intensity * hit.material.kd_;
+    glm::vec3 dir_to_light{ glm::normalize(scene.lights[0]->position - hit.hitpoint) };
 
-  glm::vec3 direction_to_light = glm::normalize(scene.lights[0]->position - hit.hitpoint);
+    glm::vec3 dir_reflaction{ glm::normalize(glm::reflect(dir_to_light, glm::normalize(hit.normale))) };
 
-  //glm::vec3 norm = glm::normalize(hit.normale);
+    Color ambient_light = scene.ambient * hit.material.kd_;
+    Color difuse_light = scene.lights[0]->intensity * (std::max(0.0f, glm::dot(dir_to_light, glm::normalize(hit.normale))) * hit.material.ka_);
+    Color specular_light = scene.lights[0]->intensity * (std::pow(std::max(0.0f, glm::dot(dir_reflaction, hit.direction)), hit.material.m_) * hit.material.ks_);
+    Color reflected_color = reflection(scene, hit);
 
-  Color diffuses_licht = scene.lights[0]->intensity * (std::max(0.0f, glm::dot(glm::normalize(hit.normale), direction_to_light)) * hit.material.kd_);
+    res = (ambient_light + difuse_light + specular_light) + hit.material.ks_ * reflected_color;
 
-  Color res = diffuses_licht + ambient_color;
+    return res;
+}
 
-  // for(auto lightsource : scene.lights) {
-
-  //   glm::vec3 dir{0.0f, 0.0f, 0.0f};
-
-  //   dir = lightsource->position - hit.hitpoint;
-
-  //   Ray connection{lightsource->position, dir};
-
-  //   for(auto object : scene.objects) {
-  //     HitPoint hit = object->intersect(connection);
-
-  //     float dist = hit.distance;
-  //   }
-
-
-
-  // }
-
-  return res;
+Color Renderer::reflection(Scene& scene, HitPoint const& hit) {
+    glm::vec3 direction = glm::reflect(glm::normalize(hit.direction), glm::normalize(hit.normale));
+    Ray ray{ hit.hitpoint + 0.1f * hit.normale, glm::normalize(direction) };
+    return trace(scene, ray);
 }
 
