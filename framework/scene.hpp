@@ -24,7 +24,7 @@ struct Scene {
 	std::string file_name = "Szene";
 	unsigned int xres = 800;
 	unsigned int yres = 600;
-	Color ambient = Color{0.0,0.0,0.0};
+	Color ambient = Color{0.5,0.5,0.5};
 };
 
 #endif // SCENE_HPP
