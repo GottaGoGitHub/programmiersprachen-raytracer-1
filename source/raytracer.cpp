@@ -29,9 +29,9 @@ int main(int argc, char* argv[])
 
         Scene scene{};
 
-        Material blue{ "blue", {0.0f, 0.0f, 0.7f}, {0.0f, 0.0f, 0.1f}, {0.0f, 0.0f, 0.1f}, 10.0f };
+        Material blue{ "blue", {0.2f, 0.2f, 0.7f}, {0.2f, 0.2f, 0.3f}, {0.2f, 0.2f, 0.3f}, 10.0f };
 
-        Material red{ "red", {0.7f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, 100.0f };
+        Material red{ "red", {0.7f, 0.2f, 0.2f}, {0.1f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, 100.0f };
 
         Light light{};
         auto l1 = std::make_shared<Light>(light);

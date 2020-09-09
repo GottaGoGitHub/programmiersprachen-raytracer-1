@@ -108,16 +108,47 @@ Color Renderer::shade(Scene &scene, HitPoint &hit) {
 
     Color res{ 0.0f, 0.0f, 0.0f };
 
-    glm::vec3 dir_to_light{ glm::normalize(scene.lights[0]->position - hit.hitpoint) };
+    std::vector < std::shared_ptr<Light>> lights_from_hitpoint{  };
 
-    glm::vec3 dir_reflaction{ glm::normalize(glm::reflect(dir_to_light, glm::normalize(hit.normale))) };
+    for (auto const& light : scene.lights) {
 
-    Color ambient_light = scene.ambient * hit.material.kd_;
-    Color difuse_light = scene.lights[0]->intensity * (std::max(0.0f, glm::dot(dir_to_light, glm::normalize(hit.normale))) * hit.material.ka_);
-    Color specular_light = scene.lights[0]->intensity * (std::pow(std::max(0.0f, glm::dot(dir_reflaction, hit.direction)), hit.material.m_) * hit.material.ks_);
-    Color reflected_color = reflection(scene, hit);
+        glm::vec3 dir_to_light{ glm::normalize(scene.lights[0]->position - hit.hitpoint) };
+        glm::vec3 origin = hit.hitpoint + 0.1f * hit.normale;
+        Ray ray_hp_light{ origin, dir_to_light };
+        bool is_visible = true;
 
-    res = (ambient_light + difuse_light + specular_light) + hit.material.ks_ * reflected_color;
+        for (auto const& shape : scene.objects) {
+
+            HitPoint hits_other_shape = shape->intersect(ray_hp_light);
+
+            if (hits_other_shape.gotHit == true) {
+                is_visible = false;
+                break;
+
+            }
+
+        }
+
+        if (is_visible = true) {
+
+            lights_from_hitpoint.push_back(light);
+
+        }
+
+    }
+
+    for (auto const& light : lights_from_hitpoint) {
+
+        glm::vec3 dir_to_light{ glm::normalize(scene.lights[0]->position - hit.hitpoint) };
+        glm::vec3 dir_reflaction{ glm::normalize(glm::reflect(dir_to_light, glm::normalize(hit.normale))) };
+        Color ambient_light = scene.ambient * hit.material.kd_;
+        Color difuse_light = scene.lights[0]->intensity * (std::max(0.0f, glm::dot(dir_to_light, glm::normalize(hit.normale))) * hit.material.ka_);
+        Color specular_light = scene.lights[0]->intensity * (std::pow(std::max(0.0f, glm::dot(dir_reflaction, hit.direction)), hit.material.m_) * hit.material.ks_);
+        Color reflected_color = reflection(scene, hit);
+
+        res = (ambient_light + difuse_light + specular_light) + hit.material.ks_ * reflected_color;
+
+    }
 
     return res;
 }
