@@ -97,7 +97,7 @@ Color Renderer::trace(Scene &scene, Ray &ray) {
   }
 
   if(hitPoints.empty()) {
-    return Color{0.4f, 0.4f, 0.4f};
+    return Color{1.0f, 1.0f, 1.0f};
   }
 
   std::sort(hitPoints.begin(), hitPoints.end());
@@ -106,7 +106,7 @@ Color Renderer::trace(Scene &scene, Ray &ray) {
 
 Color Renderer::shade(Scene &scene, HitPoint &hit) {
 
-    Color res{ 0.0f, 0.0f, 0.0f };
+    Color res{ 0.1f, 0.1f, 0.1f };
 
     std::vector < std::shared_ptr<Light>> lights_from_hitpoint{  };
 
@@ -142,8 +142,8 @@ Color Renderer::shade(Scene &scene, HitPoint &hit) {
         glm::vec3 dir_to_light{ glm::normalize(scene.lights[0]->position - hit.hitpoint) };
         glm::vec3 dir_reflaction{ glm::normalize(glm::reflect(dir_to_light, glm::normalize(hit.normale))) };
         Color ambient_light = scene.ambient * hit.material.kd_;
-        Color difuse_light = scene.lights[0]->intensity * (std::max(0.0f, glm::dot(dir_to_light, glm::normalize(hit.normale))) * hit.material.ka_);
-        Color specular_light = scene.lights[0]->intensity * (std::pow(std::max(0.0f, glm::dot(dir_reflaction, hit.direction)), hit.material.m_) * hit.material.ks_);
+        Color difuse_light = light->intensity * (std::max(0.0f, glm::dot(dir_to_light, glm::normalize(hit.normale))) * hit.material.ka_);
+        Color specular_light = light->intensity * (std::pow(std::max(0.0f, glm::dot(dir_reflaction, hit.direction)), hit.material.m_) * hit.material.ks_);
         Color reflected_color = reflection(scene, hit);
 
         res = (ambient_light + difuse_light + specular_light) + hit.material.ks_ * reflected_color;

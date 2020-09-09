@@ -34,9 +34,15 @@ int main(int argc, char* argv[])
 
         Material red{ "red", {0.7f, 0.2f, 0.2f}, {0.1f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, 100.0f };
 
+        Material green{ "green", {0.4f, 0.9f, 0.1f}, {0.1f, 0.2f, 0.0f}, {0.1f, 0.2f, 0.0f}, 30.0f };
+
         Light light{};
         auto l1 = std::make_shared<Light>(light);
         scene.lights.push_back(l1);
+
+        Light secondary_light{ "candle", {8.0f, 8.0f, 0.0f}, {0.5f, 0.5f, 0.5f}, 1.5f };
+        auto l2 = std::make_shared<Light>(secondary_light);
+        scene.lights.push_back(l2);
 
         Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 10.0f };
         //Sphere kreis_zwei{ "kreis_zwei", red, {5.0f, -5.0f, -10.0f}, 5.0f };
@@ -48,6 +54,10 @@ int main(int argc, char* argv[])
         Box box_eins{ "box_eins", red, { 5.0f, 5.0f, -10.0f}, {15.0f, 15.0f, -16.0f} };
         auto b1 = std::make_shared<Box>(box_eins);
         scene.objects.push_back(b1);
+
+        Box box_zwei{ "box_zwei", green, {-20.0f, -6.0f, 0.0f}, {20.0f, -6.0f, -100.0f} };
+        auto b2 = std::make_shared<Box>(box_zwei);
+        scene.objects.push_back(b2);
 
         unsigned const image_width = 600;
         unsigned const image_height = 600;
