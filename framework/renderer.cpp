@@ -129,7 +129,7 @@ Color Renderer::shade(Scene &scene, HitPoint &hit) {
 
         }
 
-        if (is_visible = true) {
+        if (is_visible == true) {
 
             lights_from_hitpoint.push_back(light);
 

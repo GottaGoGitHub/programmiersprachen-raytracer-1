@@ -7,6 +7,7 @@
 #include "camera.hpp"
 #include "ppmwriter.hpp"
 #include "light.hpp"
+#include "box.hpp"
 
 #include <GLFW/glfw3.h>
 #include <thread>
@@ -37,12 +38,16 @@ int main(int argc, char* argv[])
         auto l1 = std::make_shared<Light>(light);
         scene.lights.push_back(l1);
 
-        Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 10.0f };
+        /*Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 10.0f };
         Sphere kreis_zwei{ "kreis_zwei", red, {5.0f, -5.0f, -10.0f}, 5.0f };
         auto s1 = std::make_shared<Sphere>(kreis_eins);
         scene.objects.push_back(s1);
         auto s2 = std::make_shared<Sphere>(kreis_zwei);
-        scene.objects.push_back(s2);
+        scene.objects.push_back(s2);*/
+
+        Box box_eins{ "box_eins", red, { 0.0f, 0.0f, 0.0f}, {2.0f, 2.0f, 2.0f} };
+        auto b1 = std::make_shared<Box>(box_eins);
+        scene.objects.push_back(b1);
 
         unsigned const image_width = 600;
         unsigned const image_height = 600;

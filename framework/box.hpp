@@ -5,6 +5,10 @@
 #include <glm/vec3.hpp>
 #include <iostream>
 #include <glm/gtx/intersect.hpp>
+#include <algorithm>
+#include <cmath>
+#include <math.h>
+#include <catch.hpp>
 
 class Box : public Shape{
 	public:
@@ -15,6 +19,7 @@ class Box : public Shape{
 		virtual float volume() const override;
 		virtual std::ostream& print(std::ostream& os)const override;
 		virtual HitPoint intersect(Ray ray) override;
+		glm::vec3 calc_normal(HitPoint const& h);
 	private:
 		std::string name_;
 		//Color color_;
