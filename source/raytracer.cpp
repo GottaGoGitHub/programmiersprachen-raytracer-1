@@ -39,13 +39,13 @@ int main(int argc, char* argv[])
         scene.lights.push_back(l1);
 
         Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 10.0f };
-        Sphere kreis_zwei{ "kreis_zwei", red, {5.0f, -5.0f, -10.0f}, 5.0f };
+        //Sphere kreis_zwei{ "kreis_zwei", red, {5.0f, -5.0f, -10.0f}, 5.0f };
         auto s1 = std::make_shared<Sphere>(kreis_eins);
         scene.objects.push_back(s1);
-        auto s2 = std::make_shared<Sphere>(kreis_zwei);
-        scene.objects.push_back(s2);
+        //auto s2 = std::make_shared<Sphere>(kreis_zwei);
+        //scene.objects.push_back(s2);
 
-        Box box_eins{ "box_eins", blue, { 3.0f, 3.0f, -10.0f}, {15.0f, 15.0f, -13.0f} };
+        Box box_eins{ "box_eins", red, { 5.0f, 5.0f, -10.0f}, {15.0f, 15.0f, -16.0f} };
         auto b1 = std::make_shared<Box>(box_eins);
         scene.objects.push_back(b1);
 
