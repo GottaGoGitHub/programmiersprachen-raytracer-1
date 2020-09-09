@@ -41,8 +41,11 @@ int main(int argc, char* argv[])
         auto s1 = std::make_shared<Sphere>(kreis_eins);
         scene.objects.push_back(s1);
 
-        unsigned const image_width = 800;
+        unsigned const image_width = 600;
         unsigned const image_height = 600;
+
+        scene.xres = image_width;
+        scene.yres = image_height;
         //std::string const filename = "./checkerboard.ppm";
 
         Renderer renderer{ scene.yres, scene.xres, scene.file_name };
@@ -50,7 +53,7 @@ int main(int argc, char* argv[])
         renderer.render(scene);
     //}
 
- /* Window window{{image_width, image_height}};
+ Window window{{image_width, image_height}};
 
   while (!window.should_close()) {
     if (window.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -59,7 +62,7 @@ int main(int argc, char* argv[])
     window.show(renderer.color_buffer());
   }
 
-  std::cout << scene.lights[0]->name << std::endl;*/
+  std::cout << scene.lights[0]->name << std::endl;
 
   return 0;
 }

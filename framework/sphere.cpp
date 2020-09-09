@@ -47,7 +47,7 @@ HitPoint Sphere::intersect(Ray ray) {
 	hitpoint.name = name_;
 	//hitpoint.color = color_;
 	hitpoint.distance = distance;
-	hitpoint.normale = hitpoint.hitpoint - center_;
+	hitpoint.normale = glm::normalize(hitpoint.hitpoint - center_);
 	hitpoint.material = material_;
 	return hitpoint;
 }

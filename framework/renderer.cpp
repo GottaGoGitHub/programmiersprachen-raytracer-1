@@ -97,7 +97,7 @@ Color Renderer::trace(Scene &scene, Ray &ray) {
   }
 
   if(hitPoints.empty()) {
-    return Color{0.0f, 0.0f, 0.0f};
+    return Color{0.4f, 0.4f, 0.4f};
   }
 
   std::sort(hitPoints.begin(), hitPoints.end());

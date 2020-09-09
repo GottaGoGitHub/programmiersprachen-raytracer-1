@@ -22,8 +22,8 @@ struct Scene {
 	Camera cam{};
 	std::string cam_name = "";
 	std::string file_name = "Szene";
-	unsigned int xres = 800;
-	unsigned int yres = 600;
+	unsigned int xres;
+	unsigned int yres;
 	Color ambient = Color{0.5,0.5,0.5};
 };
 
