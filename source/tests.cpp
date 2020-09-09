@@ -15,7 +15,7 @@ TEST_CASE("sphere") {
     std::string name{ "Eric" };
     //Color color{ 1.5, 0.75, 1.2 };
 
-    Material blue{"blue", 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
+    Material blue{ "blue", {0.0f, 0.0f, 0.7f}, {0.0f, 0.0f, 0.1f}, {0.0f, 0.0f, 0.1f}, 10.0f };
 
     Sphere sphere{name, blue, center, radius};
 
@@ -29,7 +29,7 @@ TEST_CASE("box") {
     glm::vec3 min{ 0,0,0 };
     glm::vec3 max{ 5,5,5 };
     std::string name{ "Kai Uwe" };
-    Material blue{"blue", 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
+    Material blue{ "blue", {0.0f, 0.0f, 0.7f}, {0.0f, 0.0f, 0.1f}, {0.0f, 0.0f, 0.1f}, 10.0f };
 
     // Box box{ name, blue, min, max };
 
@@ -63,7 +63,7 @@ TEST_CASE("intersect_ray_sphere", "[intersect]")
 TEST_CASE("task 5.8", "[virtual]"){
 
     glm::vec3 position{ 0.0f, 0.0f, 0.0f };
-    Material blue{ 0, 0, 0.7, 0, 0, 0.1, 0, 0, 0.1, 10 };
+    Material blue{ "blue", {0.0f, 0.0f, 0.7f}, {0.0f, 0.0f, 0.1f}, {0.0f, 0.0f, 0.1f}, 10.0f };
     Sphere* s1 = new Sphere{ "sphere0", blue, position , 1.2f};
     Shape* s2 = new Sphere{ "sphere1", blue, position , 1.2f};
     s1->print(std::cout);
