@@ -75,11 +75,16 @@ TEST_CASE("task 5.8", "[virtual]"){
 entfernt virtual von der Basisklasse, wird beim zweiten aufruf nur der Shape Destruktor und nicht der Sphere Destruktor verwendet
 */
 
-// TEST_CASE("testing mat", "[material]"){
-//     Material m;
-//     REQUIRE(m.name_ == "default material");
-//     //std::cout << *def << std::endl;
-// }
+TEST_CASE("testing mat", "[material]"){
+    Material m;
+    REQUIRE(m.name_ == "default material");
+}
+
+TEST_CASE("testing lights", "[light]") {
+  Light light{};
+  
+  REQUIRE(light.name == "Sun");
+}
 
 
 int main(int argc, char *argv[])
