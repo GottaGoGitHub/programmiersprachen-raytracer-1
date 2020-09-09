@@ -54,7 +54,7 @@ HitPoint Box::intersect(Ray ray) {
         float y = ray.origin.y + t * ray.direction.y;
         float z = ray.origin.z + t * ray.direction.z;
 
-        if (y >= min_.y && y <= max_.y && z >= min_.z && z <= max_.z && t > 0) {
+        if (y >= min_.y && y <= max_.y && z <= min_.z && z >= max_.z && t > 0) {
             float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
             HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ -1.0f, 0.0f, 0.0f }, material_ };
             hitpoints.push_back(hit);
@@ -70,7 +70,7 @@ HitPoint Box::intersect(Ray ray) {
         float y = ray.origin.y + t * ray.direction.y;
         float z = ray.origin.z + t * ray.direction.z;
 
-        if (y >= min_.y && y <= max_.y && z >= min_.z && z <= max_.z && t > 0) {
+        if (y >= min_.y && y <= max_.y && z <= min_.z && z >= max_.z && t > 0) {
             float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
             HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ 1.0f, 0.0f, 0.0f }, material_ };
             hitpoints.push_back(hit);

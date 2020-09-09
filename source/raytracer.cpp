@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
         auto s2 = std::make_shared<Sphere>(kreis_zwei);
         scene.objects.push_back(s2);
 
-        Box box_eins{ "box_eins", red, { 0.0f, 0.0f, -10.0f}, {3.0f, 3.0f, -10.0f} };
+        Box box_eins{ "box_eins", blue, { 3.0f, 3.0f, -10.0f}, {15.0f, 15.0f, -13.0f} };
         auto b1 = std::make_shared<Box>(box_eins);
         scene.objects.push_back(b1);
 
