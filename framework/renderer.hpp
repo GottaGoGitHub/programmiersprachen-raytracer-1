@@ -42,4 +42,6 @@ private:
   PpmWriter ppm_;
 };
 
+//Ray transformRay(Ray const& ray, glm::mat4 const& mat);
+
 #endif // #ifndef BUW_RENDERER_HPP

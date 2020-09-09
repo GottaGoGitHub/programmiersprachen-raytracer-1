@@ -21,7 +21,7 @@ class Box : public Shape{
 		virtual HitPoint intersect(Ray ray) override;
 		glm::vec3 calc_normal(HitPoint const& h);
 	private:
-		std::string name_;
+		//std::string name_;
 		//Color color_;
 		glm::vec3 min_;
 		glm::vec3 max_;

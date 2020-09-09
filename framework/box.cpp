@@ -44,78 +44,149 @@ std::ostream& Box::print(std::ostream& os) const
 
 HitPoint Box::intersect(Ray ray) {
 
-    HitPoint hit;
-    Ray norm;
-    norm.direction = glm::normalize(ray.direction);
+    std::vector<HitPoint> hitpoints{};
+    
+    //intersect with left-hand side
+    if (ray.direction.x != Approx(0.0f)) {
 
-    float minimum = -INFINITY;
-    float maximum = INFINITY;
+        float t = (-ray.origin.x + min_.x) / ray.direction.x;
+        float x = ray.origin.x + t * ray.direction.x;
+        float y = ray.origin.y + t * ray.direction.y;
+        float z = ray.origin.z + t * ray.direction.z;
 
-    float t1 = (min_.x - ray.origin.x) / ray.direction.x;
-    float t2 = (max_.x - ray.origin.x) / ray.direction.x;
+        if (y >= min_.y && y <= max_.y && z >= min_.z && z <= max_.z && t > 0) {
+            float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
+            HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ -1.0f, 0.0f, 0.0f }, material_ };
+            hitpoints.push_back(hit);
+        }
 
-    minimum = std::max(minimum, std::min(t1, t2));
-    maximum = std::min(maximum, std::max(t1, t2));
-
-    t1 = (min_.y - ray.origin.y) / ray.direction.y;
-    t2 = (max_.y - ray.origin.y) / ray.direction.y;
-
-    minimum = std::max(minimum, std::min(t1, t2));
-    maximum = std::min(maximum, std::max(t1, t2));
-
-    t1 = (min_.z - ray.origin.z) / ray.direction.z;
-    t2 = (max_.z - ray.origin.z) / ray.direction.z;
-
-    minimum = std::max(minimum, std::min(t1, t2));
-    maximum = std::min(maximum, std::max(t1, t2));
-
-    if (maximum > std::max(0.0f, minimum)) {
-
-        hit.distance = sqrt(minimum * minimum*(
-            ray.direction.x * ray.direction.x +
-            ray.direction.y * ray.direction.y +
-            ray.direction.z * ray.direction.z));
-
-        hit.hitpoint = ray.origin + ray.direction * hit.distance;
-        hit.gotHit = true;
-        hit.material = material_;
-        hit.name = name_;
-        hit.normale = calc_normal(hit);
-        hit.direction = glm::normalize(ray.direction);
-        
     }
 
-    return hit;
+    //intersect with right-hand side
+    if (ray.direction.x != Approx(0.0f)) {
+
+        float t = (-ray.origin.x + min_.x) / ray.direction.x;
+        float x = ray.origin.x + t * ray.direction.x;
+        float y = ray.origin.y + t * ray.direction.y;
+        float z = ray.origin.z + t * ray.direction.z;
+
+        if (y >= min_.y && y <= max_.y && z >= min_.z && z <= max_.z && t > 0) {
+            float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
+            HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ 1.0f, 0.0f, 0.0f }, material_ };
+            hitpoints.push_back(hit);
+        }
+
+    }
+
+    //intersect with upper side
+    if (ray.direction.y != Approx(0.0f)) {
+
+        float t = (-ray.origin.y + min_.y) / ray.direction.y;
+        float x = ray.origin.x + t * ray.direction.x;
+        float y = ray.origin.y + t * ray.direction.y;
+        float z = ray.origin.z + t * ray.direction.z;
+
+        if (x >= min_.x && x <= max_.x && z <= min_.z && z >= max_.z && t > 0) {
+            float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
+            HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ 0.0f, 1.0f, 0.0f }, material_ };
+            hitpoints.push_back(hit);
+        }
+
+    }
+
+    //intersect with lower side
+    if (ray.direction.y != Approx(0.0f)) {
+
+        float t = (-ray.origin.y + min_.y) / ray.direction.y;
+        float x = ray.origin.x + t * ray.direction.x;
+        float y = ray.origin.y + t * ray.direction.y;
+        float z = ray.origin.z + t * ray.direction.z;
+
+        if (x >= min_.x && x <= max_.x && z <= min_.z && z >= max_.z && t > 0) {
+            float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
+            HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ 0.0f, -1.0f, 0.0f }, material_ };
+            hitpoints.push_back(hit);
+        }
+
+    }
+
+    //intersect with front side
+    if (ray.direction.z != Approx(0.0f)) {
+
+        float t = (-ray.origin.z + min_.z) / ray.direction.z;
+        float x = ray.origin.x + t * ray.direction.x;
+        float y = ray.origin.y + t * ray.direction.y;
+        float z = ray.origin.z + t * ray.direction.z;
+
+        if (x >= min_.x && x <= max_.x && y >= min_.y && y <= max_.y && t > 0) {
+            float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
+            HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ 0.0f, 0.0f, 1.0f }, material_ };
+            hitpoints.push_back(hit);
+        }
+
+    }
+
+    //intersect with back side
+    if (ray.direction.z != Approx(0.0f)) {
+
+        float t = (-ray.origin.z + min_.z) / ray.direction.z;
+        float x = ray.origin.x + t * ray.direction.x;
+        float y = ray.origin.y + t * ray.direction.y;
+        float z = ray.origin.z + t * ray.direction.z;
+
+        if (x >= min_.x && x <= max_.x && y >= min_.y && y <= max_.y && t > 0) {
+            float distance = sqrt(pow(ray.origin.x - x, 2) + pow(ray.origin.y - y, 2) + pow(ray.origin.z - z, 2));
+            HitPoint hit{ true, distance, name_, glm::vec3{x, y, z}, ray.direction, glm::vec3{ 0.0f, 0.0f, -1.0f }, material_ };
+            hitpoints.push_back(hit);
+        }
+
+    }
+
+    if (hitpoints.empty()) {
+        return HitPoint{};
+    }
+
+    else {
+        std::sort(hitpoints.begin(), hitpoints.end());
+
+        return *hitpoints.begin();
+    }
+
+    //return hit;
 
 }
 
 
 glm::vec3 Box::calc_normal(HitPoint const& hit) {
     auto surface_pt = hit.hitpoint;
+    glm::vec3 res;
     if (surface_pt.x == Approx(min_.x))
     {
-        return glm::vec3{ -1.0,0.0,0.0 };
+        res = { -1.0f,0.0f,0.0f };
     }
     if (surface_pt.y == Approx(min_.y))
     {
-        return glm::vec3{ 0.0,-1.0,0.0 };
+        res = { 0.0f,-1.0f,0.0f };
     }
     if (surface_pt.z == Approx(min_.z))
     {
-        return glm::vec3{ 0.0,0.0,-1.0 };
+        res = { 0.0f,0.0f,-1.0f };
     }
     if (surface_pt.x == Approx(max_.x))
     {
-        return glm::vec3{ 1.0,0.0,0.0 };
+        res = { 1.0f,0.0f,0.0f };
     }
     if (surface_pt.y == Approx(max_.y))
     {
-        return glm::vec3{ 0.0,1.0,0.0 };
+        res = { 0.0f,1.0f,0.0f };
     }
     if (surface_pt.z == Approx(max_.z))
     {
-        return glm::vec3{ 0.0,0.0,1.0 };
+        res = { 0.0f,0.0f,1.0f };
     }
+
+    return res;
+
 }
 
 

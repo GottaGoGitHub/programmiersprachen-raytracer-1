@@ -8,7 +8,7 @@
 
 struct HitPoint {
 
-    bool gotHit;
+    bool gotHit = false;
     float distance;
     std::string name;
     //Color color;
