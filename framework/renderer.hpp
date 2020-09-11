@@ -23,7 +23,7 @@ public:
   Renderer(unsigned w, unsigned h, std::string const& file);
 
   void render();
-  void render(Scene &scene);
+  void render(Scene &scene, int fps);
   void write(Pixel const& p);
   Color trace(Scene &scene, Ray &ray);
   Color shade(Scene &scene, HitPoint &hit);

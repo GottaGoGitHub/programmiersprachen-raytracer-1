@@ -30,53 +30,51 @@ int main(int argc, char* argv[])
         unsigned const image_width = 600;
         unsigned const image_height = 600;
 
+        Scene scene{};
+
+        Material blue{ "blue", {0.2f, 0.2f, 0.7f}, {0.2f, 0.2f, 0.3f}, {0.2f, 0.2f, 0.3f}, 10.0f };
+
+        Material red{ "red", {0.7f, 0.2f, 0.2f}, {0.1f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, 100.0f };
+
+        Material green{ "green", {0.4f, 0.9f, 0.1f}, {0.1f, 0.2f, 0.0f}, {0.1f, 0.2f, 0.0f}, 30.0f };
+
+        Light light{};
+        auto l1 = std::make_shared<Light>(light);
+        scene.lights.push_back(l1);
+
+        Light secondary_light{ "candle", {8.0f, 8.0f, 0.0f}, {0.5f, 0.5f, 0.5f}, 1.5f };
+        auto l2 = std::make_shared<Light>(secondary_light);
+        scene.lights.push_back(l2);
+
+        Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 10.0f };
+        //kreis_eins.scale({0.5f, 1.0f, 1.0f});
+        //Sphere kreis_zwei{ "kreis_zwei", red, {5.0f, -5.0f, -10.0f}, 5.0f };
+        auto s1 = std::make_shared<Sphere>(kreis_eins);
+        scene.objects.push_back(s1);
+        //auto s2 = std::make_shared<Sphere>(kreis_zwei);
+        //scene.objects.push_back(s2);
+
+        Box box_eins{ "box_eins", red, { 5.0f, 5.0f, -10.0f}, {15.0f, 15.0f, -16.0f} };
+        auto b1 = std::make_shared<Box>(box_eins);
+        scene.objects.push_back(b1);
+
+        Box box_zwei{ "box_zwei", green, {-20.0f, -6.0f, 0.0f}, {20.0f, -6.0f, -100.0f} };
+        auto b2 = std::make_shared<Box>(box_zwei);
+        scene.objects.push_back(b2);
+
+          
+
+        scene.xres = image_width;
+        scene.yres = image_height;
+        //std::string const filename = "./checkerboard.ppm";
 
         Renderer renderer{ image_height, image_width, "unnamed" };
 
-        for(int i = 0; i < 20; ++i) {
-
-          Scene scene{};
-
-          Material blue{ "blue", {0.2f, 0.2f, 0.7f}, {0.2f, 0.2f, 0.3f}, {0.2f, 0.2f, 0.3f}, 10.0f };
-
-          Material red{ "red", {0.7f, 0.2f, 0.2f}, {0.1f, 0.0f, 0.0f}, {0.1f, 0.0f, 0.0f}, 100.0f };
-
-          Material green{ "green", {0.4f, 0.9f, 0.1f}, {0.1f, 0.2f, 0.0f}, {0.1f, 0.2f, 0.0f}, 30.0f };
-
-          Light light{};
-          auto l1 = std::make_shared<Light>(light);
-          scene.lights.push_back(l1);
-
-          Light secondary_light{ "candle", {8.0f, 8.0f, 0.0f}, {0.5f, 0.5f, 0.5f}, 1.5f };
-          auto l2 = std::make_shared<Light>(secondary_light);
-          scene.lights.push_back(l2);
-
-          Sphere kreis_eins{ "kreis_eins", blue, {0.0f, 0.0f, -20.0f}, 10.0f };
-          kreis_eins.scale({1.5f, 1.0f, 1.5f});
-          //Sphere kreis_zwei{ "kreis_zwei", red, {5.0f, -5.0f, -10.0f}, 5.0f };
-          auto s1 = std::make_shared<Sphere>(kreis_eins);
-          scene.objects.push_back(s1);
-          //auto s2 = std::make_shared<Sphere>(kreis_zwei);
-          //scene.objects.push_back(s2);
-
-          Box box_eins{ "box_eins", red, { 5.0f, 5.0f, -10.0f}, {15.0f, 15.0f, -16.0f} };
-          auto b1 = std::make_shared<Box>(box_eins);
-          scene.objects.push_back(b1);
-
-          Box box_zwei{ "box_zwei", green, {-20.0f, -6.0f, 0.0f}, {20.0f, -6.0f, -100.0f} };
-          auto b2 = std::make_shared<Box>(box_zwei);
-          scene.objects.push_back(b2);
-
-          
-
-          scene.xres = image_width;
-          scene.yres = image_height;
-          //std::string const filename = "./checkerboard.ppm";
-
-          
-
-          renderer.render(scene);
+        for(int i = 0; i < 1; ++i) {
+          renderer.render(scene, i);
         }
+        
+        
     //}
 
   Window window{{image_width, image_height}};

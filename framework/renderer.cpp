@@ -42,7 +42,7 @@ void Renderer::render()
   ppm_.save(filename_);
 }
 
-void Renderer::render(Scene &scene) {
+void Renderer::render(Scene &scene, int fps) {
   for(int i = 0; i < (int)height_; ++i){
     for(int k = 0; k < (int)width_; ++k){
       
@@ -65,7 +65,7 @@ void Renderer::render(Scene &scene) {
     }
   }
 
-  ppm_.save("raytracer_" + filename_);
+  ppm_.save("raytracer_" + filename_ + "_" + std::to_string(fps));
 }
 
 void Renderer::write(Pixel const& p)
