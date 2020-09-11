@@ -36,9 +36,9 @@ std::ostream& operator<<(std::ostream& os, Sphere const& s) {
 	return s.print(os);
 }
 
-HitPoint Sphere::intersect(Ray ray) {
+HitPoint Sphere::intersect(Ray inRay) {
 
-	//Ray ray = transformRay(world_transformation_inv_, ray_in );
+	Ray ray = transformRay(world_transformation_inv_, inRay );
 
 	HitPoint hitpoint;
 	Ray norm;
@@ -52,11 +52,11 @@ HitPoint Sphere::intersect(Ray ray) {
 	hitpoint.distance = distance;
 	hitpoint.material = material_;
 
-	/*glm::vec4 hitpoint_transformed = world_transformation_ * glm::vec4(hitpoint.hitpoint, 1.0f);
+	glm::vec4 hitpoint_transformed = world_transformation_ * glm::vec4(hitpoint.hitpoint, 1.0f);
 	glm::vec4 normale_transformed = glm::transpose(world_transformation_inv_) * glm::vec4{ glm::normalize(hitpoint.normale), 0.0f };
 
 	hitpoint.hitpoint = { hitpoint_transformed.x, hitpoint_transformed.y, hitpoint_transformed.z };
-	hitpoint.normale = { normale_transformed.x, normale_transformed.y, normale_transformed.z };*/
+	hitpoint.normale = { normale_transformed.x, normale_transformed.y, normale_transformed.z };
 
 	return hitpoint;
 }
