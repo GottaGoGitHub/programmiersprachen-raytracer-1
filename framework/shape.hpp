@@ -19,7 +19,7 @@ class Shape {
 		virtual HitPoint intersect(Ray ray) = 0;
 
 		void rotate(float phi, glm::vec3 const& axis);
-		void scale(float scalar, glm::vec3 const& direction);
+		void scale(glm::vec3 const& direction);
 		void translate(glm::vec3 const& direction);
 
 	protected:

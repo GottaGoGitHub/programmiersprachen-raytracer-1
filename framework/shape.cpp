@@ -21,13 +21,13 @@ std::ostream& operator<<(std::ostream& os, Shape const& s) {
 	return s.print(os);
 }
 
-void Shape::translate(glm::vec3 const& axis) {
+void Shape::translate(glm::vec3 const& direction) {
 
 	glm::mat4 translation_matrix = glm::mat4{
 
-		glm::vec4(1.0f, 0.0f, 0.0f, axis.x),
-		glm::vec4(0.0f, 1.0f, 0.0f, axis.y),
-		glm::vec4(0.0f, 0.0f, 1.0f, axis.z),
+		glm::vec4(1.0f, 0.0f, 0.0f, direction.x),
+		glm::vec4(0.0f, 1.0f, 0.0f, direction.y),
+		glm::vec4(0.0f, 0.0f, 1.0f, direction.z),
 		glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)
 
 	};
@@ -37,13 +37,13 @@ void Shape::translate(glm::vec3 const& axis) {
 
 }
 
-void Shape::scale(float phi, glm::vec3 const& axis) {
+void Shape::scale(glm::vec3 const& direction) {
 
 	glm::mat4 scaling_matrix = glm::mat4{
 
-		glm::vec4(axis.x, 0.0f, 0.0f, 0.0f),
-		glm::vec4(0.0f, axis.y, 0.0f, 0.0f),
-		glm::vec4(0.0f, 0.0f, axis.z, 0.0f),
+		glm::vec4(direction.x, 0.0f, 0.0f, 0.0f),
+		glm::vec4(0.0f, direction.y, 0.0f, 0.0f),
+		glm::vec4(0.0f, 0.0f, direction.z, 0.0f),
 		glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)
 
 	};
